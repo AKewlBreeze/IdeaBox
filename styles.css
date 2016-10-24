@@ -2,10 +2,29 @@
   border: solid 2px red;
 }
 
+
+input {
+  display: block;
+}
+
+/*Bottom Section CSS*/
+
 .bottom {
   border: solid 2px black;
 }
 
-input {
-  display: block;
+
+.search {
+  margin: auto;
+  width: 60%;
+
+}
+
+.ideabody {
+  border: solid 2px black;
+  margin: auto;
+}
+
+h2 {
+  color: #6D6E71;
 }
