@@ -1,0 +1,11 @@
+.top {
+  border: solid 2px red;
+}
+
+.bottom {
+  border: solid 2px black;
+}
+
+input {
+  display: block;
+}
