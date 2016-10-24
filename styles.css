@@ -1,11 +1,44 @@
+body {
+  text-align: center;
+}
 .top {
-  border: solid 2px red;
+  background: #E5F3F2;
+}
+header {
+  padding:20px;
+  font-family: Roboto Slab;
+  font-weight: 700;
+  font-size: 40px;
+  color: #6D6E71;
 }
 
-.bottom {
-  border: solid 2px black;
+.firstword {
+  color: #00A79D;
+}
+
+.save {
+  width: 60.25%;
+  height: 25px;
+  font-size: 100%;
+  margin-bottom: 20px;
+  background: #00A79D;
+  color: #FFFFFF;
+  border: none;
+}
+
+.save:hover {
+  background: #045E45;
 }
 
 input {
   display: block;
+  margin: auto;
+  width: 60%;
+  height: 25px;
+  font-size: 100%;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 450px) {
+
 }
