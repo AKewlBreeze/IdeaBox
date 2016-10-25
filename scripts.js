@@ -12,6 +12,7 @@ $(".save").on("click", function(e){
 // json stringify to send back to local storage
 // grab ideas from local storage and display on page
 // clear input values
+// evaluate prepend to show the newest ideas first
 })
 
 
