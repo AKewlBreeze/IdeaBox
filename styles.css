@@ -44,7 +44,6 @@ input {
 /*Bottom Section CSS*/
 
 .bottom {
-  border: solid 2px black;
 }
 
 .search {
@@ -53,13 +52,68 @@ input {
 }
 
 .ideabody {
+  dispaly: flex;
+  flex-direction: column;
   width: 60%;
-  border: solid 2px black;
-  margin: auto;
+  margin: auto ;
+  margin-top: 10px;
 }
 
 h2 {
   color: #6D6E71;
+  text-align: left;
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 14px;
+  width: 100%;
+  order: 1;
+  font-family: 'Roboto Slab', serif;
+
+}
+
+
+.body-content {
+  color: #939598;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin-top:5px;
+  /*text: Open Sans, Regular 400*/
+}
+
+.quality {
+  color: #6D6E71;
+  margin-top: 5px;
+}
+
+.deleteArrow{
+  height: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+  float: right;
+}
+
+.quality{
+  text-align: left;
+  vertical-align: top;
+}
+
+.upvote {
+  height:20px;
+  width:20px;
+  vertical-align: top;
+  margin-right: 5px;
+}
+
+.downvote {
+  height: 20px;
+  vertical-align: top;
+
+}
+
+.delete {
+
+
 }
 
 @media screen and (max-width: 450px) {

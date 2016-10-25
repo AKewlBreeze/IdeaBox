@@ -20,6 +20,14 @@ $inputTitle.val(null);
 $inputBody.val(null);
 
 // evaluate prepend to show the newest ideas first
+
+//  $inputTitle.val(null);
+//  $inputBody.val(null);
+
+})
+
+
+// evaluate prepend to show the newest ideas first
 })
 
 function Idea(title, body){
