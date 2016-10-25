@@ -1,9 +1,11 @@
 body {
   text-align: center;
 }
+
 .top {
   background: #E5F3F2;
 }
+
 header {
   padding:20px;
   font-family: Roboto Slab;
@@ -39,11 +41,25 @@ input {
   margin-bottom: 15px;
 }
 
-.ideabody {
-  width: 60%;
+/*Bottom Section CSS*/
+
+.bottom {
   border: solid 2px black;
 }
 
-@media screen and (max-width: 450px) {
-
+.search {
+  margin: auto;
+  width: 60%;
 }
+
+.ideabody {
+  width: 60%;
+  border: solid 2px black;
+  margin: auto;
+}
+
+h2 {
+  color: #6D6E71;
+}
+
+@media screen and (max-width: 450px) {
