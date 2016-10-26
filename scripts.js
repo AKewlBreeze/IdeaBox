@@ -50,9 +50,24 @@ function renderHTML (storedIdeas){
   })
 }
 
-//$('.delete')on('click', function{
-  // parse storedIdeas
+//
+// $('.idea-section').on('click', '.deleteArrow', function(){
+//   console.log('hey');
+//   // find the object id of the corresponding object
+//   var $objectId = $(this).parent('id');
+//   // parse savedIdeas
+//   storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"));
+//   // find the index of the object we want to remove
+//   var index = storedIdeas.indexOf($objectid);
+//   // remove that object from the array
+//   storedIdeas.splice(index);
+//   // json stringify to send back to local storage
+//   localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+//   renderHTML(storedIdeas);
+// });
 
-  // remove item from array
-  // stringify storedIdeas
-//})
+//function to call on to compare id value of idea object value in stored arrays
+// function select (storedIdeas, idea) {
+//   for (var i = 0; i < storedIdeas.length; i++) {
+//         if (idea.id == storedIdeas[i].id) return idea.id;
+// }}
