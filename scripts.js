@@ -1,13 +1,13 @@
 var $inputTitle = $(".title")
 var $inputBody = $(".description")
-var storedIdeas = []
+var storedIdeas =  []
 
 // json parse to access item from local storage
 
 // display storedIdeas on the page
 
 $( document ).ready(function() {
-  var storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
+  storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
   renderHTML(storedIdeas)
 });
 
