@@ -1,13 +1,14 @@
 var $inputTitle = $(".title")
 var $inputBody = $(".description")
-var storedIdeas =  []
+var storedIdeas = []
 
 $( document ).ready(function() {
   storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
-  if (storedIdeas == []) {
-    !renderHTML(storedIdeas)
+  if (storedIdeas) {
+    renderHTML(storedIdeas);
+  } else {
+    storedIdeas = [];
   }
-  else {renderHTML(storedIdeas)}
 });
 
 $(".save").on("click", function(){
