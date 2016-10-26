@@ -1,6 +1,6 @@
 var $inputTitle = $(".title")
 var $inputBody = $(".description")
-var storedIdeas = []
+var storedIdeas =  []
 
 // json parse to access item from local storage
 
