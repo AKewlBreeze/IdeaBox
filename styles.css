@@ -44,11 +44,13 @@ input {
 /*Bottom Section CSS*/
 
 .bottom {
+  margin-top: 1%;
 }
 
 .search {
   margin: auto;
   width: 60%;
+
 }
 
 .ideabody {
@@ -56,7 +58,7 @@ input {
   flex-direction: column;
   width: 60%;
   margin: auto ;
-  margin-top: 10px;
+  margin-top: 1%;
 }
 
 h2 {
@@ -77,7 +79,7 @@ h2 {
   text-align: left;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-  margin-top:5px;
+  margin-top:2%;
   /*text: Open Sans, Regular 400*/
 }
 
@@ -93,9 +95,17 @@ h2 {
   float: right;
 }
 
+hr {
+  margin: auto, 7%;
+
+  width: 100%;
+
+}
+
 .quality{
   text-align: left;
   vertical-align: top;
+  margin-top: 5%;
 }
 
 .upvote {
@@ -109,6 +119,11 @@ h2 {
   height: 20px;
   vertical-align: top;
 
+}
+
+.idea-section {
+
+  border: solid red 1px;
 }
 
 .delete {
