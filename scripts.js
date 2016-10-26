@@ -2,13 +2,12 @@ var $inputTitle = $(".title")
 var $inputBody = $(".description")
 var storedIdeas =  []
 
-// json parse to access item from local storage
-
-// display storedIdeas on the page
-
 $( document ).ready(function() {
-  storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
-  renderHTML(storedIdeas)
+  var oldstoredIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
+  if (storedIdeas == []) {
+    !renderHTML(oldstoredIdeas)
+  }
+  else {renderHTML(oldstoredIdeas)}
 });
 
 $(".save").on("click", function(){
@@ -46,7 +45,18 @@ function Idea(title, body){
 }
 
 function renderHTML (storedIdeas){
-  storedIdeas.map(function(idea){
+  if (storedIdeas == []){
+    (storedIdeas.map(function(idea){
+  return applyInput(idea)
+}))}
+  else {storedIdeas.map(function(idea){
   return applyInput(idea)
   })
-}
+}}
+
+//$('.delete')on('click', function{
+  // parse storedIdeas
+
+  // remove item from array
+  // stringify storedIdeas
+//})
