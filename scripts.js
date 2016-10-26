@@ -1,14 +1,13 @@
 var $inputTitle = $(".title")
 var $inputBody = $(".description")
-var storedIdeas = []
+var storedIdeas =  []
 
 $( document ).ready(function() {
   storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
-  if (storedIdeas) {
-    renderHTML(storedIdeas);
-  } else {
-    storedIdeas = [];
+  if (storedIdeas == []) {
+    !renderHTML(storedIdeas)
   }
+  else {renderHTML(storedIdeas)}
 });
 
 $(".save").on("click", function(){
@@ -46,14 +45,10 @@ function Idea(title, body){
 }
 
 function renderHTML (storedIdeas){
-  if (storedIdeas == []){
-    (storedIdeas.map(function(idea){
-  return applyInput(idea)
-}))}
-  else {storedIdeas.map(function(idea){
+  storedIdeas.map(function(idea){
   return applyInput(idea)
   })
-}}
+}
 
 //$('.delete')on('click', function{
   // parse storedIdeas
