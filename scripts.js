@@ -3,9 +3,13 @@ var $inputBody = $(".description")
 var storedIdeas = []
 
 // json parse to access item from local storage
-JSON.parse(localStorage.getItem("storedIdeas"))
+
 // display storedIdeas on the page
 
+$( document ).ready(function() {
+  var storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
+  renderHTML(storedIdeas)
+});
 
 $(".save").on("click", function(){
   var inputTitle = $inputTitle.val()
@@ -38,5 +42,11 @@ function Idea(title, body){
   this.quality = "swill";
   this.creation = document.createElement('article');
   this.class = 'idea-section';
-  this.innerHTML = `<span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality:</p><hr>`
+  this.innerHTML = `<span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr>`
+}
+
+function renderHTML (storedIdeas){
+  storedIdeas.map(function(idea){
+  return applyInput(idea)
+  })
 }
