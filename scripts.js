@@ -40,7 +40,7 @@ function Idea(title, body){
   this.body = body;
   this.id = Date.now();
   this.quality = "swill";
-  this.creation = document.createElement('article');
+  this.creation = document.createElement('section');
   this.class = 'idea-section';
   this.innerHTML = `<span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr>`
 }
