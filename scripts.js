@@ -7,7 +7,7 @@ var storedIdeas = []
 // display storedIdeas on the page
 
 $( document ).ready(function() {
-  var storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
+  storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
   renderHTML(storedIdeas)
 });
 
