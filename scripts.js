@@ -3,11 +3,11 @@ var $inputBody = $(".description")
 var storedIdeas =  []
 
 $( document ).ready(function() {
-  var oldstoredIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
+  storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
   if (storedIdeas == []) {
-    !renderHTML(oldstoredIdeas)
+    !renderHTML(storedIdeas)
   }
-  else {renderHTML(oldstoredIdeas)}
+  else {renderHTML(storedIdeas)}
 });
 
 $(".save").on("click", function(){
