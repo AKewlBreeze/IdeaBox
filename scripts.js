@@ -23,6 +23,9 @@ localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
 
 // grab idea from local storage and display on page
 applyInput(newIdea)
+deleteButton();
+upvote();
+downvote();
 
 // clear input values
 $inputTitle.val(null);
@@ -34,9 +37,25 @@ function applyInput (newIdea) {
 }
 
 
+function deleteButton () {
+  $(".deleteArrow").on('click', function() {
+   console.log("werk");
+  })
+}
+
+function upvote () {
+  $(".upvote").on('click', function() {
+   console.log("werk");
+  })
+}
+
+function downvote () {
+  $(".downvote").on('click', function() {
+   console.log("werk");
+  })
+}
 
 
-// Search functionality
 $(".search").keyup(function(e){
     if(e.keyCode == 13)
     {
@@ -44,8 +63,8 @@ $(".search").keyup(function(e){
         console.log("werk")
     }
 });
-$(document).ready(function(){
 
+$(document).ready(function(){
   $('.search').keyup(function(){
     var filter = $(this).val(), count = 0;
     $('.idea-section').each(function(){
@@ -57,8 +76,6 @@ $(document).ready(function(){
       }
     });
 });
-
-
 });
 
 
@@ -69,17 +86,23 @@ function Idea(title, body){
   this.quality = "swill";
   this.creation = document.createElement('section');
   this.class = 'idea-section';
-  this.innerHTML = `<div class = ${this.class}><span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr></div>`
+  this.innerHTML = `<div class = ${this.class}><span class = "delete"><h2>${this.title}<button class = "deleteArrow"></button></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${this.quality}</p><hr></div>`
 }
 
-$(".deleteArrow").click(function(){
-  console.log("werk");
-})
+$(".idea-section").on('click', '.deleteButton', function(){
+  var id = $(this).parent().attr('id');
+  var idea =  findIdea(id);
+  deleteIdea(idea);
+  $(this).parent().remove();
+});
+
 
 function renderHTML (storedIdeas){
   if (storedIdeas == []){
     (storedIdeas.map(function(idea){
+
   return applyInput(idea)
+
 }))}
   else {storedIdeas.map(function(idea){
   return applyInput(idea)
