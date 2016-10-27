@@ -33,7 +33,34 @@ function applyInput (newIdea) {
   $('.ideabody').prepend(newIdea.innerHTML)
 }
 
-// evaluate prepend to show the newest ideas first
+
+
+
+// Search functionality
+$(".search").keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $(this).trigger("enterKey");
+        console.log("werk")
+    }
+});
+$(document).ready(function(){
+
+  $('.search').keyup(function(){
+    var filter = $(this).val(), count = 0;
+    $('.idea-section').each(function(){
+      if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+        $(this ).hide();
+      } else {
+        $(this).show();
+        count++;
+      }
+    });
+});
+
+
+});
+
 
 function Idea(title, body){
   this.title = title;
@@ -42,8 +69,12 @@ function Idea(title, body){
   this.quality = "swill";
   this.creation = document.createElement('section');
   this.class = 'idea-section';
-  this.innerHTML = `<span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr>`
+  this.innerHTML = `<div class = ${this.class}><span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr></div>`
 }
+
+$(".deleteArrow").click(function(){
+  console.log("werk");
+})
 
 function renderHTML (storedIdeas){
   if (storedIdeas == []){
