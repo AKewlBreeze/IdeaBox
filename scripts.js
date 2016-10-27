@@ -1,56 +1,63 @@
 var $inputTitle = $(".title")
 var $inputBody = $(".description")
-var storedIdeas =  []
+// var storedIdeas =  []
 
 $( document ).ready(function() {
-  storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
-  if (storedIdeas == []) {
-    !renderHTML(storedIdeas)
-  }
-  else {renderHTML(storedIdeas)}
+  // storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
+  // if (storedIdeas == []) {
+  //   !renderHTML(storedIdeas)
+  // }
+  // else {renderHTML(storedIdeas)}
 });
 
 $(".save").on("click", function(){
   var inputTitle = $inputTitle.val()
   var inputBody = $inputBody.val()
   var newIdea = new Idea(inputTitle, inputBody)
+  debugger;
   var localKey = newIdea.id
 //push newIdea to global array storedIdeas
-  storedIdeas.push(newIdea)
+  // storedIdeas.push({ newIdea.id: newIdea})
 // json stringify to send back to local storage
-localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+// localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+localStorage.setItem(newIdea.id, newIdea)
 
 // grab idea from local storage and display on page
-applyInput(newIdea)
-
-// clear input values
-$inputTitle.val(null);
-$inputBody.val(null);
+// applyInput(newIdea)
+//
+// // clear input values
+// $inputTitle.val(null);
+// $inputBody.val(null);
 })
 
-function applyInput (newIdea) {
-  $('.ideabody').prepend(newIdea.innerHTML)
+
+function renderAll () {
+  $.each(localStorage, function( timeStamp, ideaObject) { renderIdea(ideaObject) } )
 }
-
-// evaluate prepend to show the newest ideas first
-
+     
 function Idea(title, body){
   this.title = title;
   this.body = body;
   this.id = Date.now();
   this.quality = "swill";
-  this.creation = document.createElement('section');
   this.class = 'idea-section';
-  this.innerHTML = `<span class = "delete"><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr>`
 }
 
-function renderHTML (storedIdeas){
-  storedIdeas.map(function(idea){
-  return applyInput(idea)
-  })
+function renderIdea(idea) {
+  $('.ideaBody').prepend(`<span class = "delete" id='${idea.id}'><h2>${this.title}<img src="./images/delete.svg"/ class = "deleteArrow"></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><img src = "./images/upvote.svg" class = "upvote"><img src = "./images/downvote.svg" class = "downvote">quality: ${this.quality}</p><hr>`)
 }
 
+// function deleteIdea(idea) {
+//   $(`.ideaBody #section-${idea.id}`).remove()
 //
+// }
+// function renderHTML (storedIdeas){
+//   storedIdeas.map(function(idea){
+//   return applyInput(idea)
+//   })
+// }
+
+
 // $('.idea-section').on('click', '.deleteArrow', function(){
 //   console.log('hey');
 //   // find the object id of the corresponding object
@@ -66,7 +73,7 @@ function renderHTML (storedIdeas){
 //   renderHTML(storedIdeas);
 // });
 
-//function to call on to compare id value of idea object value in stored arrays
+// // function to call on to compare id value of idea object value in stored arrays
 // function select (storedIdeas, idea) {
 //   for (var i = 0; i < storedIdeas.length; i++) {
 //         if (idea.id == storedIdeas[i].id) return idea.id;
