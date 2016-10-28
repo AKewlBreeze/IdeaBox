@@ -7,7 +7,9 @@ $(document).ready(function() {
     storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
     if (storedIdeas) {
         renderHTML(storedIdeas);
-        deleteButton()
+        deleteButton();
+        upvote();
+        downvote();
     } else {
         storedIdeas = [];
     }
@@ -28,7 +30,6 @@ $(".save").on("click", function() {
     deleteButton();
     upvote();
     downvote();
-
     // clear input values
     $inputTitle.val(null);
     $inputBody.val(null);
@@ -41,11 +42,26 @@ function applyInput(newIdea) {
 
 
 
-function upvote() {
-    $(".upvote").on('click', function() {
-        console.log("werk");
-    })
+function upvote () {
+  $(".idea-section").on('click', ".upvote", function() {
+    console.log("hmmmm");
+      var id = this.closest("div").id;
+      uptick(id);
+      $("#" + id)
+  });
 }
+
+function uptick (id){
+  for (var i = 0; i < storedIdeas.length; i++) {
+      if (id == storedIdeas[i].id) {
+
+      if (storedIdeas[i].quality === "swill")
+      {storedIdeas[i].quality = "plausible"}
+      else {storedIdeas[i].quality = "genius"}
+      }
+    }
+    localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+  }
 
 function downvote() {
     $(".downvote").on('click', function() {
@@ -90,7 +106,6 @@ function Idea(title, body) {
 function deleteButton() {
     $(".idea-section").on('click', '.deleteArrow', function() {
         var id = this.closest("div").id;
-        debugger
         deleteItemFromStorage(id);
         $("#" + id).remove();
 
