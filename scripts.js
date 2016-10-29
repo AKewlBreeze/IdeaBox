@@ -36,8 +36,36 @@ $(".save").on("click", function() {
 })
 
 function applyInput(newIdea) {
-    $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2>${newIdea.title}<button class = "deleteArrow"></button></h2></span><p class = "body-content">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
+    $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2 class="editable-title" contenteditable="true">${newIdea.title}<button class = "deleteArrow"></button></h2></span><p contenteditable="true" class = "editable-body">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
 }
+
+
+    $(".ideabody").on("keypress", ".editable-title", function (e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        $(this).blur();
+        console.log('blur')
+      }
+    });
+
+    // $(".ideabody").on("keypress", ".editable-body", function (e) {
+    //   if (e.which == 13) {
+    //     e.preventDefault();
+    //     $(this).blur();
+    //     console.log('blur');
+    //     var id = this.closest("div").id;
+    //     var inputBody = $inputBody.val();
+    //     for (var i = 0; i < storedIdeas.length; i++) {
+    //         if (id == storedIdeas[i].id) {
+    //         {storedIdeas[i].body = }
+    //         }
+    //       }
+    //       localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+    //       $('.idea-section').empty();
+    //       renderHTML(storedIdeas);
+    //    }
+    //   }
+    // });
 
 
 function upvote () {
@@ -86,12 +114,7 @@ function downtick (id) {
 }
 
 
-$(".search").keyup(function(e) {
-    if (e.keyCode == 13) {
-        $(this).trigger("enterKey");
-        console.log("werk")
-    }
-});
+
 
 $(document).ready(function() {
     $('.search').keyup(function() {
