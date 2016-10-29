@@ -41,16 +41,15 @@ function applyInput(newIdea) {
 
 
 function upvote () {
-  $(".idea-section").on('click', ".upvote", function() {
+  $(".ideabody").on("click", ".upvote", function() {
     console.log("hmmmm");
       var id = this.closest("div").id;
       uptick(id);
-  //    renderHTML("#" + id)
   });
 }
 
 function uptick (id){
-  debugger;
+
   for (var i = 0; i < storedIdeas.length; i++) {
       if (id == storedIdeas[i].id) {
       if (storedIdeas[i].quality === "swill")
@@ -62,19 +61,28 @@ function uptick (id){
     $('.idea-section').empty();
     renderHTML(storedIdeas);
  }
-  // switch(storedIdeas[i].quality) {
-  // }
-  // case 'swill':
-  // return 'plausible';
-  // case 'plausible':
-  // return 'genius';
-  // default:
-  // return 'swill';
+
 
 function downvote() {
-    $(".downvote").on('click', function() {
-        console.log("werk");
+  $(".ideabody").on("click", ".downvote", function() {
+    console.log("hmmmm");
+    var id = $(this).closest('div').attr('id');
+      downtick(id);
     })
+}
+
+function downtick (id) {
+
+  for (var i = 0; i < storedIdeas.length; i++) {
+      if (id == storedIdeas[i].id) {
+      if (storedIdeas[i].quality === "genius")
+      {storedIdeas[i].quality = "plausible"}
+      else {storedIdeas[i].quality = "swill"}
+      }
+    }
+    localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+    $('.idea-section').empty();
+    renderHTML(storedIdeas);
 }
 
 
@@ -111,8 +119,9 @@ function Idea(title, body, quality) {
 }
 
 function deleteButton() {
-    $(".idea-section").on('click', '.deleteArrow', function() {
-        var id = this.closest("div").id;
+    $(".ideabody").on('click', '.deleteArrow', function() {
+        debugger;
+        var id = $(this).closest('div').attr('id');
         deleteItemFromStorage(id);
         $("#" + id).remove();
 
@@ -131,12 +140,12 @@ function deleteItemFromStorage(id) {
 }
 
 
-
-function findIdea() {
-    return storedIdeas.find(function(idea) {
-        return idea.id === parseInt(id);
-    });
-}
+//
+// function findIdea() {
+//     return storedIdeas.find(function(idea) {
+//         return idea.id === parseInt(id);
+//     });
+// }
 
 function renderHTML(storedIdeas) {
 
