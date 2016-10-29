@@ -36,10 +36,8 @@ $(".save").on("click", function() {
 })
 
 function applyInput(newIdea) {
-    $('.ideabody').prepend(newIdea.innerHTML)
+    $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2>${newIdea.title}<button class = "deleteArrow"></button></h2></span><p class = "body-content">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
 }
-
-
 
 
 function upvote () {
@@ -47,21 +45,31 @@ function upvote () {
     console.log("hmmmm");
       var id = this.closest("div").id;
       uptick(id);
-      $("#" + id)
+  //    renderHTML("#" + id)
   });
 }
 
 function uptick (id){
+  debugger;
   for (var i = 0; i < storedIdeas.length; i++) {
       if (id == storedIdeas[i].id) {
-
       if (storedIdeas[i].quality === "swill")
       {storedIdeas[i].quality = "plausible"}
       else {storedIdeas[i].quality = "genius"}
       }
     }
     localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
-  }
+    $('.idea-section').empty();
+    renderHTML(storedIdeas);
+ }
+  // switch(storedIdeas[i].quality) {
+  // }
+  // case 'swill':
+  // return 'plausible';
+  // case 'plausible':
+  // return 'genius';
+  // default:
+  // return 'swill';
 
 function downvote() {
     $(".downvote").on('click', function() {
@@ -93,14 +101,13 @@ $(document).ready(function() {
 });
 
 
-function Idea(title, body) {
+function Idea(title, body, quality) {
     this.title = title;
     this.body = body;
     this.id = Date.now();
-    this.quality = "swill";
+    this.quality = quality || "swill";
     this.creation = document.createElement('section');
     this.class = 'idea-section';
-    this.innerHTML = `<div id=${this.id} class = ${this.class}><span class = "delete"><h2>${this.title}<button class = "deleteArrow"></button></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${this.quality}</p><hr></div>`
 }
 
 function deleteButton() {
@@ -110,7 +117,6 @@ function deleteButton() {
         $("#" + id).remove();
 
         // display updated storage after removal
-
     });
 }
 
@@ -122,20 +128,9 @@ function deleteItemFromStorage(id) {
     }
     // set updated array to localStorage
     localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
-
 }
 
 
-
-
-
-// $(".idea-section").on('click', '.deleteButton', function(){
-//   debugger
-//   var id = $(this).parent().attr('localKey');
-//   var idea =  findIdea(id);
-//   deleteIdea(idea);
-//   $(this).parent().remove();
-// });
 
 function findIdea() {
     return storedIdeas.find(function(idea) {
@@ -157,10 +152,3 @@ function renderHTML(storedIdeas) {
         })
     }
 }
-
-//$('.delete')on('click', function{
-// parse storedIdeas
-
-// remove item from array
-// stringify storedIdeas
-//})
