@@ -36,12 +36,14 @@ $(".save").on("click", function() {
 })
 
 function applyInput(newIdea) {
-    $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2 contenteditable="true">${newIdea.title}<button class = "deleteArrow"></button></h2></span><p contenteditable ="true" class = "body-content">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
+
+    $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2>${newIdea.title}<button class = "deleteArrow"></button></h2></span><p class = "body-content">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
+
 }
 
 function submitTitle () {
   $(".ideabody").on("click", "h2", function() {
-    
+
   });
 }
 
