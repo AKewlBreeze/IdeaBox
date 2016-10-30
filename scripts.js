@@ -7,7 +7,9 @@ $(document).ready(function() {
     storedIdeas = JSON.parse(localStorage.getItem("storedIdeas"))
     if (storedIdeas) {
         renderHTML(storedIdeas);
-        deleteButton()
+        deleteButton();
+        upvote();
+        downvote();
     } else {
         storedIdeas = [];
     }
@@ -28,29 +30,64 @@ $(".save").on("click", function() {
     deleteButton();
     upvote();
     downvote();
-
     // clear input values
     $inputTitle.val(null);
     $inputBody.val(null);
 })
 
 function applyInput(newIdea) {
-    $('.ideabody').prepend(newIdea.innerHTML)
+    $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2 contenteditable="true">${newIdea.title}<button class = "deleteArrow"></button></h2></span><p contenteditable ="true" class = "body-content">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
 }
 
-
-
-
-function upvote() {
-    $(".upvote").on('click', function() {
-        console.log("werk");
-    })
+function submitTitle () {
+  $(".ideabody").on("click", "h2", function() {
+    
+  });
 }
+
+function upvote () {
+  $(".ideabody").on("click", ".upvote", function() {
+    console.log("hmmmm");
+      var id = this.closest("div").id;
+      uptick(id);
+  });
+}
+
+function uptick (id){
+
+  for (var i = 0; i < storedIdeas.length; i++) {
+      if (id == storedIdeas[i].id) {
+      if (storedIdeas[i].quality === "swill")
+      {storedIdeas[i].quality = "plausible"}
+      else {storedIdeas[i].quality = "genius"}
+      }
+    }
+    localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+    $('.idea-section').empty();
+    renderHTML(storedIdeas);
+ }
+
 
 function downvote() {
-    $(".downvote").on('click', function() {
-        console.log("werk");
+  $(".ideabody").on("click", ".downvote", function() {
+    console.log("hmmmm");
+    var id = $(this).closest('div').attr('id');
+      downtick(id);
     })
+}
+
+function downtick (id) {
+
+  for (var i = 0; i < storedIdeas.length; i++) {
+      if (id == storedIdeas[i].id) {
+      if (storedIdeas[i].quality === "genius")
+      {storedIdeas[i].quality = "plausible"}
+      else {storedIdeas[i].quality = "swill"}
+      }
+    }
+    localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+    $('.idea-section').empty();
+    renderHTML(storedIdeas);
 }
 
 
@@ -77,25 +114,23 @@ $(document).ready(function() {
 });
 
 
-function Idea(title, body) {
+function Idea(title, body, quality) {
     this.title = title;
     this.body = body;
     this.id = Date.now();
-    this.quality = "swill";
+    this.quality = quality || "swill";
     this.creation = document.createElement('section');
     this.class = 'idea-section';
-    this.innerHTML = `<div id=${this.id} class = ${this.class}><span class = "delete"><h2>${this.title}<button class = "deleteArrow"></button></h2></span><p class = "body-content">${this.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${this.quality}</p><hr></div>`
 }
 
 function deleteButton() {
-    $(".idea-section").on('click', '.deleteArrow', function() {
-        var id = this.closest("div").id;
-        debugger
+    $(".ideabody").on('click', '.deleteArrow', function() {
+        debugger;
+        var id = $(this).closest('div').attr('id');
         deleteItemFromStorage(id);
         $("#" + id).remove();
 
         // display updated storage after removal
-
     });
 }
 
@@ -107,26 +142,15 @@ function deleteItemFromStorage(id) {
     }
     // set updated array to localStorage
     localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
-
 }
 
 
-
-
-
-// $(".idea-section").on('click', '.deleteButton', function(){
-//   debugger
-//   var id = $(this).parent().attr('localKey');
-//   var idea =  findIdea(id);
-//   deleteIdea(idea);
-//   $(this).parent().remove();
-// });
-
-function findIdea() {
-    return storedIdeas.find(function(idea) {
-        return idea.id === parseInt(id);
-    });
-}
+//
+// function findIdea() {
+//     return storedIdeas.find(function(idea) {
+//         return idea.id === parseInt(id);
+//     });
+// }
 
 function renderHTML(storedIdeas) {
 
@@ -142,10 +166,3 @@ function renderHTML(storedIdeas) {
         })
     }
 }
-
-//$('.delete')on('click', function{
-// parse storedIdeas
-
-// remove item from array
-// stringify storedIdeas
-//})
