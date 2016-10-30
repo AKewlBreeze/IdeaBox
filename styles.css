@@ -117,7 +117,7 @@ hr {
   margin-right: 5px;
 }
 
-.upvote:hoover {
+.upvote:hover {
   background: url('./images/upvote-hover.svg' ) no-repeat;
   border: none;
 }
@@ -130,8 +130,8 @@ hr {
   vertical-align: top;
 
 }
-.downvote:hoover {
-  background: url('./images/downvote-hover.svg' ) 
+.downvote:hover {
+  background: url('./images/downvote-hover.svg' )
 }
 
 .idea-section {
@@ -146,7 +146,7 @@ hr {
 
 }
 
-.deleteArrow:hoover {
+.deleteArrow:hover {
   background: url('./images/delete-hover.svg' ) no-repeat;
   border: none;
 }
