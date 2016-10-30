@@ -27,9 +27,7 @@ $(".save").on("click", function() {
 
     // grab idea from local storage and display on page
     applyInput(newIdea)
-    deleteButton();
-    upvote();
-    downvote();
+
     // clear input values
     $inputTitle.val(null);
     $inputBody.val(null);
@@ -39,12 +37,8 @@ function applyInput(newIdea) {
     $('.ideabody').prepend(`<div id=${newIdea.id} class = ${newIdea.class}><span class = "delete"><h2 class="editable-title" contenteditable="true">${newIdea.title}<button class = "deleteArrow"></button></h2></span><p contenteditable="true" class = "editable-body">${newIdea.body}</p><p class = "quality"><button class = "upvote"></button><button class = "downvote"></button> quality: ${newIdea.quality}</p><hr></div>`)
 }
 
-
-    $(".ideabody").on("focusout", ".editable-title", function (e) {
-      if (e.which == 13) {
-        e.preventDefault();
-        $(this).blur();
-      }
+//assigns input edits on idea title to the object and rerenders the page
+    $(".ideabody").on("focusout", ".editable-title", function () {
       var id = this.closest("div").id;
       var inputTitle = $(this).text();
       for (var i = 0; i < storedIdeas.length; i++) {
@@ -57,11 +51,16 @@ function applyInput(newIdea) {
         renderHTML(storedIdeas);
      });
 
-    $(".ideabody").on("focusout", ".editable-body", function (e) {
-      if (e.which == 13) {
+ //prevent enter default on idea title
+     $('.ideabody').on('keypress', '.editable-title', function(e) {
+        if (e.which == 13) {
         e.preventDefault();
         $(this).blur();
-      }
+        }
+      });
+
+//  assigns input edits on the idea description to object and rerenders page
+    $(".ideabody").on("focusout", ".editable-body", function () {
         var id = this.closest("div").id;
         var inputBody = $(this).text();
         for (var i = 0; i < storedIdeas.length; i++) {
@@ -74,10 +73,16 @@ function applyInput(newIdea) {
           renderHTML(storedIdeas);
        });
 
+//prevent enter default on idea description
+  $('.ideabody').on('keypress', '.editable-body', function(e) {
+     if (e.which == 13) {
+       e.preventDefault();
+       $(this).blur();
+       }
+     });
 
 function upvote () {
   $(".ideabody").on("click", ".upvote", function() {
-    console.log("hmmmm");
       var id = this.closest("div").id;
       uptick(id);
   });
@@ -150,7 +155,6 @@ function Idea(title, body, quality) {
 
 function deleteButton() {
     $(".ideabody").on('click', '.deleteArrow', function() {
-        debugger;
         var id = $(this).closest('div').attr('id');
         deleteItemFromStorage(id);
         $("#" + id).remove();
@@ -170,12 +174,6 @@ function deleteItemFromStorage(id) {
 }
 
 
-//
-// function findIdea() {
-//     return storedIdeas.find(function(idea) {
-//         return idea.id === parseInt(id);
-//     });
-// }
 
 function renderHTML(storedIdeas) {
 
