@@ -40,19 +40,27 @@ function applyInput(newIdea) {
 }
 
 
-    $(".ideabody").on("keypress", ".editable-title", function (e) {
+    $(".ideabody").on("focusout", ".editable-title", function (e) {
       if (e.which == 13) {
         e.preventDefault();
         $(this).blur();
-        console.log('blur')
       }
-    });
+      var id = this.closest("div").id;
+      var inputTitle = $(this).text();
+      for (var i = 0; i < storedIdeas.length; i++) {
+          if (id == storedIdeas[i].id) {
+          storedIdeas[i].title = inputTitle;
+          }
+        }
+        localStorage.setItem("storedIdeas", JSON.stringify(storedIdeas));
+        $('.idea-section').empty();
+        renderHTML(storedIdeas);
+     });
 
     $(".ideabody").on("focusout", ".editable-body", function (e) {
       if (e.which == 13) {
         e.preventDefault();
         $(this).blur();
-        console.log('blur');
       }
         var id = this.closest("div").id;
         var inputBody = $(this).text();
